@@ -1,0 +1,95 @@
+-- -----------------------------------------------------
+-- Schema eventspot
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `eventspot` ;
+USE `eventspot` ;
+-- -----------------------------------------------------
+-- Table `eventspot`.`category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `eventspot`.`category` (
+  `idCategory` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idCategory`));
+
+-- -----------------------------------------------------
+-- Table `eventspot`.`modality`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `eventspot`.`modality` (
+  `idModality` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idModality`));
+
+-- -----------------------------------------------------
+-- Table `eventspot`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `eventspot`.`user` (
+  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` MEDIUMTEXT NOT NULL,
+  `city` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idUser`));
+
+-- -----------------------------------------------------
+-- Table `eventspot`.`event`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `eventspot`.`event` (
+  `idEvent` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` TEXT NOT NULL,
+  `organizers` VARCHAR(45) NOT NULL,
+  `initial_date` DATE NOT NULL,
+  `final_date` DATE NULL,
+  `hours` TIME NOT NULL,
+  `state` VARCHAR(45) NULL,
+  `city` VARCHAR(45) NULL,
+  `street` VARCHAR(45) NULL,
+  `NBHD` VARCHAR(45) NULL,
+  `number` VARCHAR(10) NULL,
+  `value` VARCHAR(10) NULL,
+  `contact` VARCHAR(45) NULL,
+  `vacancies` VARCHAR(45) NULL,
+  `status` INT NOT NULL,
+  `idCategory` INT NOT NULL,
+  `idModality` INT NOT NULL,
+  `idUser` INT NOT NULL,
+  PRIMARY KEY (`idEvent`, `idCategory`, `idModality`, `idUser`));
+
+-- -----------------------------------------------------
+-- Table `eventspot`.`contact`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `eventspot`.`contact` (
+  `idContact` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `topic` VARCHAR(45) NOT NULL,
+  `message` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idContact`));
+
+-- -----------------------------------------------------
+-- Popular
+-- -----------------------------------------------------
+
+USE `eventspot`;
+INSERT INTO `user` (`idUser`, `name`, `email`, `password`, `city`) VALUES
+(1, 'Admin', 'admin@gmail.com', 'b529acb479b480c81e164636b2058738aa5044258c3b8600b0539d5997b819f6', '');
+
+INSERT into category values ("", "games");
+INSERT into category values ("", "esportivos");
+INSERT into category values ("", "cooporativos");
+INSERT into category values ("", "cientificos");
+INSERT into category values ("", "religiosos");
+INSERT into category values ("", "socais");
+INSERT into category values ("", "culturais");
+INSERT into category values ("", "culinarios");
+INSERT into category values ("", "moda");
+INSERT into category values ("", "saude e bem-estar");
+INSERT into category values ("", "academico");
+
+INSERT into modality values ("", "online");
+INSERT into modality values ("", "presencial");
+INSERT into modality values ("", "hibrido");
+
+INSERT INTO `event` (`idEvent`, `name`, `description`, `organizers`, `initial_date`, `final_date`, `hours`, `city`, `street`, `NBHD`, `number`, `value`, `contact`, `vacancies`, `status`, `idCategory`, `idModality`, `idUser`) VALUES
+(1, 'Josif', 'A Jornada Científica e Tecnológica foi criada a partir da iniciativa de docentes do IFSULDEMINAS – Campus Machado com o objetivo de divulgar a produção científica das instituições de ensino, pesquisa e extensão do sul de Minas e também ser um espaço de troca de experiências, incentivo à pesquisa, formação de estudantes e da socialização dos conhecimentos construídos nessas instituições.', 'Aracele Garcia de Oliveira Fassbinder', '2023-10-24', '2023-10-26', '07:00:00', 'Muzambinho', 'IFSULDEMINAS', 'Morro Preto', 213, 234, 'josif@gmail.com', 13, 3, 5, 2, 1),
+(2, 'FECT', 'A 2ª Feira de Educação, Ciência e Tecnologia do IFSULDEMINAS - Campus Muzambinho (FECT-MUZ) visa estimular o interesse em educação, ciência e tecnologia em jovens da educação básica.', 'Aracele Garcia de Oliveira Fassbinder', '2023-06-24', '2023-06-24', '07:00:00', 'Muzambinho', 'IFSULDEMINAS', 'Morro Preto', 213, 234, 'fect@gmail.com', 13, 3, 6, 2, 1),
+(3, 'BGS', 'A BGS tem um DNA essencialmente gamer e é uma feira diferente de tudo oque existe no segmento. A cada edição apresenta mais atrações para o público se divertir com milhares de estações, sejam máquinas arcade, plataformas mobile, PCs, óculos de realidade virtual, consoles, board games, card games ou qualquer outra forma jogar.', 'Aracele Garcia de Oliveira Fassbinder', '2023-10-24', '2023-10-26', '07:00:00', 'Muzambinho', 'IFSULDEMINAS', 'Morro Preto', 213, 234, 'bgs@gmail.com', 13, 3, 8, 2, 1);
